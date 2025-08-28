@@ -25,6 +25,7 @@ OPTION(RAWS_BATCH "Enable Behave RAWS Data Batch Reader" OFF)
 OPTION(COMPUTE_SPOT_PILE "Build pile spot fire distance calculator" OFF)
 OPTION(COMPUTE_SPOT_SURFACE "Build surface spot fire distance calculator" OFF)
 OPTION(COMPUTE_SPOT_TORCHING_TREES "Build torching tree spot fire distance calculator" OFF)
+OPTION(BEHAVE_CMD "Enable CMD output" ON)
 
 IF(TEST_BEHAVE)
     ADD_DEFINITIONS(-DTEST_BEHAVE)
@@ -195,4 +196,14 @@ IF(COMPUTE_SPOT_TORCHING_TREES)
         ${SOURCE}
         src/spotDistanceTorchingTrees/computeTorchingTreesSpottingDistance.cpp
         ${HEADERS})
+ENDIF()
+
+IF(BEHAVE_CMD)
+        SET(BOOST_TEST_SOURCE
+            src/behave_cmd/behave_cmd.cpp)
+        ADD_EXECUTABLE(behave_cmd 
+            ${SOURCE}
+            ${BOOST_TEST_SOURCE}
+            ${HEADERS})
+        TARGET_LINK_LIBRARIES(behave_cmd)
 ENDIF()

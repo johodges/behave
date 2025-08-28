@@ -29,7 +29,7 @@
 ******************************************************************************/
 
 #include "surfaceFireReactionIntensity.h"
-
+#include <iostream>
 #include <cmath>
 #include "surfaceFuelbedIntermediates.h"
 
@@ -93,6 +93,11 @@ double SurfaceFireReactionIntensity::calculateReactionIntensity()
     double weightedFuelLoad[FuelConstants::MaxLifeStates];
     weightedFuelLoad[FuelLifeState::Dead] = surfaceFuelbedIntermediates_->getWeightedFuelLoadByLifeState(FuelLifeState::Dead);
     weightedFuelLoad[FuelLifeState::Live] = surfaceFuelbedIntermediates_->getWeightedFuelLoadByLifeState(FuelLifeState::Live);
+    
+    std::cout << "\nweightedFuelLoad[FuelLifeState::Dead]:\n";
+    std::cout << weightedFuelLoad[FuelLifeState::Dead];
+    std::cout << "\nweightedFuelLoad[FuelLifeState::Live]:\n";
+    std::cout << weightedFuelLoad[FuelLifeState::Live];
 
     double weightedHeat[FuelConstants::MaxLifeStates];
     weightedHeat[FuelLifeState::Dead] = surfaceFuelbedIntermediates_->getWeightedHeatByLifeState(FuelLifeState::Dead);

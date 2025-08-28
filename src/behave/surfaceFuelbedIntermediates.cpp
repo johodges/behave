@@ -31,6 +31,7 @@
 #include "surfaceFuelbedIntermediates.h"
 
 #define _USE_MATH_DEFINES
+#include <iostream>
 #include <cmath>
 #include "fuelModels.h"
 #include "surfaceInputs.h"
@@ -169,6 +170,11 @@ void SurfaceFuelbedIntermediates::calculateFuelbedIntermediates(int fuelModelNum
 
     // Intermediate calculations, summing parameters by fuel component
     calculateCharacteristicSAVR();
+
+    std::cout << "\ntotalLoadForLifeState_[FuelLifeState::Dead]:\n";
+    std::cout << totalLoadForLifeState_[FuelLifeState::Dead];
+    std::cout << "\ntotalLoadForLifeState_[FuelLifeState::Live]:\n";
+    std::cout << totalLoadForLifeState_[FuelLifeState::Live];
 
     /* final calculations */
     double totalLoad = totalLoadForLifeState_[FuelLifeState::Dead] + totalLoadForLifeState_[FuelLifeState::Live];
@@ -595,11 +601,25 @@ void SurfaceFuelbedIntermediates::calculateCharacteristicSAVR()
             weightedSavr[FuelLifeState::Live] += fractionOfTotalSurfaceAreaLive_[i] * savrLive_[i]; // weighted SAVR
             totalLoadForLifeState_[FuelLifeState::Live] += loadLive_[i];
         }
-
+        std::cout << "\ni: ";
+        std::cout << i;
+        std::cout << "\nsizeSortedFractionOfSurfaceAreaDead_: ";
+        std::cout << sizeSortedFractionOfSurfaceAreaDead_[i];
+        std::cout << "\nwnDead: ";
+        std::cout << wnDead[i];
+        std::cout << "\nsizeSortedFractionOfSurfaceAreaLive_: ";
+        std::cout << sizeSortedFractionOfSurfaceAreaLive_[i];
+        std::cout << "\nwnLive: ";
+        std::cout << wnLive[i];
         weightedFuelLoad_[FuelLifeState::Dead] += sizeSortedFractionOfSurfaceAreaDead_[i] * wnDead[i];
         weightedFuelLoad_[FuelLifeState::Live] += sizeSortedFractionOfSurfaceAreaLive_[i] * wnLive[i];
 
     }
+
+    std::cout << "\nweightedFuelLoad[FuelLifeState::Dead]:\n";
+    std::cout << weightedFuelLoad_[FuelLifeState::Dead];
+    std::cout << "\nweightedFuelLoad[FuelLifeState::Live]:\n";
+    std::cout << weightedFuelLoad_[FuelLifeState::Live];
 
     for (int lifeState = 0; lifeState < FuelConstants::MaxLifeStates; lifeState++)
     {
@@ -636,6 +656,15 @@ void SurfaceFuelbedIntermediates::countSizeClasses()
 
 void SurfaceFuelbedIntermediates::dynamicLoadTransfer()
 {
+    std::cout << "\nloadDead_]:\n";
+    for (const auto& e : loadDead_) {
+       std::cout << e << std::endl;
+    }
+    //std::cout << loadDead_;
+    std::cout << "\nloadLive_]:\n";
+    for (const auto& e : loadLive_) {
+       std::cout << e << std::endl;
+    }
     if (moistureLive_[0] < 0.30)
     {
         loadDead_[3] = loadLive_[0];
@@ -646,6 +675,15 @@ void SurfaceFuelbedIntermediates::dynamicLoadTransfer()
         //loadDead_[3] = loadLive_[0] * (1.20 - moistureLive_[0]) / 0.9;
         loadDead_[3] = loadLive_[0] * (1.333 - 1.11 * moistureLive_[0]); // To keep consistant with BehavePlus
         loadLive_[0] -= loadDead_[3];
+    }
+    std::cout << "\nloadDead_]:\n";
+    for (const auto& e : loadDead_) {
+       std::cout << e << std::endl;
+    }
+    //std::cout << loadDead_;
+    std::cout << "\nloadLive_]:\n";
+    for (const auto& e : loadLive_) {
+       std::cout << e << std::endl;
     }
 }
 
@@ -679,6 +717,11 @@ void SurfaceFuelbedIntermediates::calculateFractionOfTotalSurfaceAreaForLifeStat
     fractionOfTotalSurfaceArea_[FuelLifeState::Dead] = totalSurfaceArea_[FuelLifeState::Dead] / (totalSurfaceArea_[FuelLifeState::Dead] +
         totalSurfaceArea_[FuelLifeState::Live]);
     fractionOfTotalSurfaceArea_[FuelLifeState::Live] = 1.0 - fractionOfTotalSurfaceArea_[FuelLifeState::Dead];
+    
+    std::cout << "\nfractionOfTotalSurfaceArea_[FuelLifeState::Dead]:\n";
+    for (const auto& e : fractionOfTotalSurfaceArea_) {
+       std::cout << e << std::endl;
+    }
 }
 
 void SurfaceFuelbedIntermediates::calculateTotalSurfaceAreaForLifeState(int lifeState)
@@ -711,11 +754,20 @@ void SurfaceFuelbedIntermediates::calculateTotalSurfaceAreaForLifeState(int life
         {
             surfaceAreaDead_[i] = loadDead_[i] * savrDead_[i] / fuelDensityDead_[i];
             totalSurfaceArea_[lifeState] += surfaceAreaDead_[i];
+            std::cout << "\ni: ";
+            std::cout << i;
+            std::cout << "\nsurfaceAreaDead_: ";
+            std::cout << surfaceAreaDead_[i];
+            
         }
         if (lifeState == FuelLifeState::Live)
         {
             surfaceAreaLive_[i] = loadLive_[i] * savrLive_[i] / fuelDensityLive_[i];
             totalSurfaceArea_[lifeState] += surfaceAreaLive_[i];
+            std::cout << "\ni: ";
+            std::cout << i;
+            std::cout << "\nsurfaceAreaLive_: ";
+            std::cout << surfaceAreaLive_[i];
         }
     }
 }
@@ -784,6 +836,18 @@ void SurfaceFuelbedIntermediates::sumFractionOfTotalSurfaceAreaBySizeClass(
         {
             summedFractionOfTotalSurfaceArea[4] += fractionOfTotalSurfaceAreaDeadOrLive[i];
         }
+    //std::cout << loadDead_;
+    std::cout << "\nsavrDeadOrLive]:\n";
+    std::cout << savrDeadOrLive[i];
+    std::cout << "\nfractionOfTotalSurfaceAreaDeadOrLive]:\n";
+    std::cout << fractionOfTotalSurfaceAreaDeadOrLive[i];
+    //std::cout << "\nsummedFractionOfTotalSurfaceArea:\n";
+    //std::cout << summedFractionOfTotalSurfaceArea[i];
+    }
+    std::cout << "\nsummedFractionOfTotalSurfaceArea:\n";
+    for (int i=0; i < 5; i++) {
+       std::cout << summedFractionOfTotalSurfaceArea[i];
+       std::cout << "\n";
     }
 }
 
@@ -822,6 +886,19 @@ void SurfaceFuelbedIntermediates::assignFractionOfTotalSurfaceAreaBySizeClass(Fu
         {
             sizeSortedFractionOfSurfaceAreaDeadOrLive[i] = 0.0;
         }
+    //std::cout << loadDead_;
+    std::cout << "\n]:\nsizeSortedFractionOfSurfaceAreaDeadOrLive\n";
+    std::cout << sizeSortedFractionOfSurfaceAreaDeadOrLive[i];
+    }
+    std::cout << "\nsummedFractionOfTotalSurfaceArea:\n";
+    for (int i=0; i < 5; i++) {
+       std::cout << summedFractionOfTotalSurfaceArea[i];
+       std::cout << "\n";
+    }
+    std::cout << "\nsizeSortedFractionOfSurfaceAreaDeadOrLive:\n";
+    for (int i=0; i < 5; i++) {
+       std::cout << sizeSortedFractionOfSurfaceAreaDeadOrLive[i];
+       std::cout << "\n";
     }
 }
 
