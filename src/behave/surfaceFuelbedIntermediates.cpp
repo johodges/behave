@@ -672,22 +672,12 @@ void SurfaceFuelbedIntermediates::calculateFractionOfTotalSurfaceAreaForLifeStat
             for (const auto& e : sizeSortedFractionOfSurfaceAreaDead_) {
                 std::cout << e << std::endl;
             }
-            std::copy(std::begin(fractionOfTotalSurfaceAreaDead_),std::end(fractionOfTotalSurfaceAreaDead_),std::begin(sizeSortedFractionOfSurfaceAreaDead_));
-            std::cout << "\nDEAD FROM COPY:\n";
-            for (const auto& e : sizeSortedFractionOfSurfaceAreaDead_) {
-                std::cout << e << std::endl;
-            }
         }
         if (lifeState == FuelLifeState::Live)
         {
             sumFractionOfTotalSurfaceAreaBySizeClass(fractionOfTotalSurfaceAreaLive_, savrLive_, summedFractionOfTotalSurfaceArea);
             assignFractionOfTotalSurfaceAreaBySizeClass(FuelLifeState::Live, savrLive_, summedFractionOfTotalSurfaceArea, sizeSortedFractionOfSurfaceAreaLive_);
             std::cout << "\nLIVE FROM ROUTINE:\n";
-            for (const auto& e : sizeSortedFractionOfSurfaceAreaLive_) {
-                std::cout << e << std::endl;
-            }
-            std::copy(std::begin(fractionOfTotalSurfaceAreaLive_),std::end(fractionOfTotalSurfaceAreaLive_),std::begin(sizeSortedFractionOfSurfaceAreaLive_));
-            std::cout << "\nLIVE FROM COPY:\n";
             for (const auto& e : sizeSortedFractionOfSurfaceAreaLive_) {
                 std::cout << e << std::endl;
             }
