@@ -65,6 +65,7 @@ public:
     double getTotalLiveFuelLoad(LoadingUnits::LoadingUnitsEnum loadingUnits) const;
     double getTotalDeadFuelLoad(LoadingUnits::LoadingUnitsEnum loadingUnits) const;
     double getTotalDeadHerbaceousFuelLoad(LoadingUnits::LoadingUnitsEnum loadingUnits) const;
+    double getTotalLiveHerbaceousFuelLoad(LoadingUnits::LoadingUnitsEnum loadingUnits) const;
 
     // Palmetto-Gallberry getters
     double getPalmettoGallberryMoistureOfExtinctionDead() const;

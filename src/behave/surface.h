@@ -96,6 +96,10 @@ public:
     double getCharacteristicMoistureByLifeState(FuelLifeState::FuelLifeStateEnum lifeState, FractionUnits::FractionUnitsEnum moistureUnits) const;
     double getLiveFuelMoistureOfExtinction(FractionUnits::FractionUnitsEnum moistureUnits) const;
     double getCharacteristicSAVR(SurfaceAreaToVolumeUnits::SurfaceAreaToVolumeUnitsEnum savrUnits) const;
+    double getWindAdjustmentFactor() const;
+    double getWindSpeedLimit() const;
+    double getEffectiveWindSpeed() const;
+    double getWindFactor() const;
 
     // SurfaceIntermediate Getters
     double getRelativePackingRatio() const;
@@ -103,6 +107,7 @@ public:
     double getTotalLiveFuelLoad(LoadingUnits::LoadingUnitsEnum loadingUnits) const;
     double getTotalDeadFuelLoad(LoadingUnits::LoadingUnitsEnum loadingUnits) const;
     double getTotalDeadHerbaceousFuelLoad(LoadingUnits::LoadingUnitsEnum loadingUnits) const;
+    double getTotalLiveHerbaceousFuelLoad(LoadingUnits::LoadingUnitsEnum loadingUnits) const;
 
     // SurfaceInputs setters
     void setCanopyHeight(double canopyHeight, LengthUnits::LengthUnitsEnum canopyHeightUnits);

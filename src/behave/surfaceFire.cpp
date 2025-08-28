@@ -677,6 +677,11 @@ double SurfaceFire::getSlopeFactor() const
     return phiS_;
 }
 
+double SurfaceFire::getWindFactor() const
+{
+    return phiW_;
+}
+
 double SurfaceFire::getHeatSink() const
 {
     return surfaceFuelbedIntermediates_.getHeatSink();
@@ -948,6 +953,11 @@ double SurfaceFire::getTotalDeadFuelLoad(LoadingUnits::LoadingUnitsEnum loadingU
 double SurfaceFire::getTotalDeadHerbaceousFuelLoad(LoadingUnits::LoadingUnitsEnum loadingUnits) const {
 
     return surfaceFuelbedIntermediates_.getTotalDeadHerbaceousFuelLoad(loadingUnits);
+}
+
+double SurfaceFire::getTotalLiveHerbaceousFuelLoad(LoadingUnits::LoadingUnitsEnum loadingUnits) const {
+
+    return surfaceFuelbedIntermediates_.getTotalLiveHerbaceousFuelLoad(loadingUnits);
 }
 
 

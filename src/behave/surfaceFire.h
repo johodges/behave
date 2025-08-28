@@ -87,6 +87,7 @@ public:
     bool getIsWindLimitExceeded() const;
     double getRelativePackingRatio() const;
     double getPackingRatio()const;
+    double getWindFactor() const;
 
     // Palmetto-Gallberry getters
     double getPalmettoGallberryMoistureOfExtinctionDead() const;
@@ -137,6 +138,7 @@ public:
     double getTotalLiveFuelLoad(LoadingUnits::LoadingUnitsEnum loadingUnits) const;
     double getTotalDeadFuelLoad(LoadingUnits::LoadingUnitsEnum loadingUnits) const;
     double getTotalDeadHerbaceousFuelLoad(LoadingUnits::LoadingUnitsEnum loadingUnits) const;
+    double getTotalLiveHerbaceousFuelLoad(LoadingUnits::LoadingUnitsEnum loadingUnits) const;
 
 protected:
     // Protected setters accessible to friend classes

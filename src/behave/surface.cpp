@@ -401,6 +401,10 @@ double Surface::getTotalDeadHerbaceousFuelLoad(LoadingUnits::LoadingUnitsEnum lo
     return surfaceFire_.getTotalDeadHerbaceousFuelLoad(loadingUnits);
 }
 
+double Surface::getTotalLiveHerbaceousFuelLoad(LoadingUnits::LoadingUnitsEnum loadingUnits) const {
+    return surfaceFire_.getTotalLiveHerbaceousFuelLoad(loadingUnits);
+}
+
 void Surface::setCanopyCover(double canopyCover, FractionUnits::FractionUnitsEnum canopyUnits)
 {
     surfaceInputs_.setCanopyCover(canopyCover, canopyUnits);
@@ -923,6 +927,26 @@ double Surface::getWindSpeed(SpeedUnits::SpeedUnitsEnum windSpeedUnits,
         }
     }
     return SpeedUnits::fromBaseUnits(windSpeed, windSpeedUnits);
+}
+
+double Surface::getWindAdjustmentFactor() const
+{
+    return surfaceFire_.getWindAdjustmentFactor();
+}
+
+double Surface::getWindSpeedLimit() const
+{
+    return surfaceFire_.getWindSpeedLimit();
+}
+
+double Surface::getEffectiveWindSpeed() const
+{
+    return surfaceFire_.getEffectiveWindSpeed();
+}
+
+double Surface::getWindFactor() const
+{
+    return surfaceFire_.getWindFactor();
 }
 
 double Surface::getWindDirection() const
